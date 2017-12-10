@@ -135,6 +135,10 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 	double sigma_x = std_landmark[0];
 	double sigma_y = std_landmark[1];
 
+	double denominator = 2*M_PI*sigma_x*sigma_y;
+	double pow_x = pow(sigma_x, 2);
+	double pow_y = pow(sigma_y, 2);
+
 	int i = 0;
 	for (auto& particle: particles) {
 		
@@ -172,7 +176,7 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 			double x_diff = observation_map_x - min_landmark.x_f;
 			double y_diff = observation_map_y - min_landmark.y_f;
 
-			double g = ( exp( -0.5 * (pow(x_diff, 2)/pow(sigma_x, 2) + pow(x_diff,2)/pow(sigma_y, 2)) ) ) / (2*M_PI*sigma_x*sigma_y);
+			double g = ( exp( -0.5 * (pow(x_diff, 2)/pow_x + pow(y_diff,2)/pow_y))) / denominator;
 
 			weight = weight * g;
 		}
