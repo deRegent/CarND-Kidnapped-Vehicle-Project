@@ -29,6 +29,8 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
 	// The code is similar to the Section 5 of lesson 14
 	// except this time the particles are being added to the vector
 
+	cout << "init" << endl;
+
 	// Set the number of particles.
 	num_particles = 100;
 
@@ -80,6 +82,8 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
 	* Qf = Q0 + .Q(dt)
 	*/
 
+	cout << "prediction" << endl;
+
 	default_random_engine gen;
 
 	// random Gaussian noise
@@ -129,6 +133,8 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 	//   and the following is a good resource for the actual equation to implement (look at equation 
 	//   3.33
 	//   http://planning.cs.uiuc.edu/node99.html
+
+	cout << "updateWeights" << endl;
 
 	double sigma_x = std_landmark[0];
 	double sigma_y = std_landmark[1];
@@ -185,6 +191,8 @@ void ParticleFilter::resample() {
 	// TODO: Resample particles with replacement with probability proportional to their weight. 
 	// NOTE: You may find std::discrete_distribution helpful here.
 	//   http://en.cppreference.com/w/cpp/numeric/random/discrete_distribution
+
+	cout << "resample" << endl;
 
 	// the code below is C++ implementation of
 	// the resampling wheel from section 20 of the lesson 13
