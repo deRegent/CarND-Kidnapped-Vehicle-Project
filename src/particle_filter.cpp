@@ -29,8 +29,6 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
 	// The code is similar to the Section 5 of lesson 14
 	// except this time the particles are being added to the vector
 
-	cout << "init" << endl;
-
 	// Set the number of particles.
 	num_particles = 100;
 
@@ -84,8 +82,6 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
 	* Qf = Q0 + .Q(dt)
 	*/
 
-	cout << "prediction" << endl;
-
 	default_random_engine gen;
 
 	// random Gaussian noise
@@ -136,23 +132,17 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 	//   3.33
 	//   http://planning.cs.uiuc.edu/node99.html
 
-	cout << "updateWeights" << endl;
-
 	double sigma_x = std_landmark[0];
 	double sigma_y = std_landmark[1];
 
 	int i = 0;
 	for (auto& particle: particles) {
-
-		cout << "iterate particles" << endl;
 		
 		// The result of multi-variate Gaussian calculation
 		// is a product, so initialize with 1
 		long double weight = 1.0;
 
 		for (auto&& observation: observations) {
-
-			cout << "iterate observations" << endl;
 			
 			// Observations in the car coordinate system are transformed 
 			// into map coordinates with a homogenous transformation matrix
@@ -168,8 +158,6 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 
 			for (auto& landmark: map_landmarks.landmark_list){
 
-				cout << "iterate landmarks" << endl;
-			
 				double x_diff = observation_map_x - landmark.x_f;
 				double y_diff = observation_map_y - landmark.y_f;
 				double distance = sqrt(x_diff*x_diff + y_diff*y_diff);
@@ -180,8 +168,6 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 				}
 			}
 
-			cout << "Calculate multi-variate gaussian" << endl;
-
 			// Calculate the multi-variate Gaussian
 			double x_diff = observation_map_x - min_landmark.x_f;
 			double y_diff = observation_map_y - min_landmark.y_f;
@@ -191,13 +177,9 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 			weight = weight * g;
 		}
 
-		cout << "update particle weight" << endl;
-
 		particle.weight = weight;
 		weights[i] = weight;
 		i++;
-
-		cout << "finished updating" << endl;
 	}
 }
 
@@ -205,8 +187,6 @@ void ParticleFilter::resample() {
 	// TODO: Resample particles with replacement with probability proportional to their weight. 
 	// NOTE: You may find std::discrete_distribution helpful here.
 	//   http://en.cppreference.com/w/cpp/numeric/random/discrete_distribution
-
-	cout << "resample" << endl;
 
 	// the code below is C++ implementation of
 	// the resampling wheel from section 20 of the lesson 13
