@@ -133,6 +133,7 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 	double sigma_x = std_landmark[0];
 	double sigma_y = std_landmark[1];
 
+	int i = 0;
 	for (auto& particle: particles) {
 		
 		// The result of multi-variate Gaussian calculation
@@ -176,6 +177,7 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 
 		particle.weight = weight;
 		weights[i] = weight;
+		i++;
 	}
 }
 
