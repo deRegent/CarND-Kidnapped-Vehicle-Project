@@ -83,12 +83,12 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
 	default_random_engine gen;
 
 	// random Gaussian noise
-	normal_distribution<double> dist_x(0, std[0]);
-	normal_distribution<double> dist_y(0, std[1]);
-	normal_distribution<double> dist_theta(0, std[2]);
+	normal_distribution<double> dist_x(0, std_pos[0]);
+	normal_distribution<double> dist_y(0, std_pos[1]);
+	normal_distribution<double> dist_theta(0, std_pos[2]);
 
 	for (auto& particle: particles){
-		dot_theta_delta = yaw_rate*delta_t
+		double dot_theta_delta = yaw_rate*delta_t;
 
 		// avoid division by zero
 		// reuse of the prediction step code 
@@ -167,10 +167,10 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 			}
 
 			// Calculate the multi-variate Gaussian
-			double x_diff = observation_map_x - min_landmark.x;
-			double y_diff = observation_map_y - min_landmark.y;
+			double x_diff = observation_map_x - min_landmark.x_f;
+			double y_diff = observation_map_y - min_landmark.y_f;
 
-			double g = ( exp( -0.5 * (pow(x_diff, 2)/pow(sigma_x, 2) + pow(x_diff,2)/pow(sigma_y, 2)) ) ) / (2*M_PI*sigma_x*sigma_y)
+			double g = ( exp( -0.5 * (pow(x_diff, 2)/pow(sigma_x, 2) + pow(x_diff,2)/pow(sigma_y, 2)) ) ) / (2*M_PI*sigma_x*sigma_y);
 
 			weight = weight * g;
 		}
