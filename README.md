@@ -6,7 +6,5 @@ In this project I utilize the techniques learned in Localization lessons to solv
 
 This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
 
-The project is still in WIP state.
-
 
 
