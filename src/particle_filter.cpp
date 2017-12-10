@@ -178,6 +178,8 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 				}
 			}
 
+			cout << "Calculate multi-variate gaussian" << endl;
+
 			// Calculate the multi-variate Gaussian
 			double x_diff = observation_map_x - min_landmark.x_f;
 			double y_diff = observation_map_y - min_landmark.y_f;
@@ -187,9 +189,13 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 			weight = weight * g;
 		}
 
+		cout << "update particle weight" << endl;
+
 		particle.weight = weight;
 		weights[i] = weight;
 		i++;
+
+		cout << "finished updating" << endl;
 	}
 }
 
