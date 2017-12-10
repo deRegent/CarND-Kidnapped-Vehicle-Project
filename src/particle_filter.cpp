@@ -63,6 +63,8 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
 
 		// add a new particle to the set
 		particles.push_back(particle);
+
+		weights.push_back(particles[i].weight);
 	}
 
 	is_initialized = true;
