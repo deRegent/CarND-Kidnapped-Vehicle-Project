@@ -141,12 +141,16 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 
 	int i = 0;
 	for (auto& particle: particles) {
+
+		cout << "iterate particles" << endl;
 		
 		// The result of multi-variate Gaussian calculation
 		// is a product, so initialize with 1
 		long double weight = 1.0;
 
 		for (auto&& observation: observations) {
+
+			cout << "iterate observations" << endl;
 			
 			// Observations in the car coordinate system are transformed 
 			// into map coordinates with a homogenous transformation matrix
@@ -161,6 +165,8 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 			double min_distance = sensor_range; // distance cannot be more than sensor range
 
 			for (auto& landmark: map_landmarks.landmark_list){
+
+				cout << "iterate landmarks" << endl;
 			
 				double x_diff = observation_map_x - landmark.x_f;
 				double y_diff = observation_map_y - landmark.y_f;
