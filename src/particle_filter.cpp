@@ -30,7 +30,7 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
 	// except this time the particles are being added to the vector
 
 	// Set the number of particles.
-	num_particles = 100;
+	num_particles = 10;
 
 	default_random_engine gen;
 	double std_x, std_y, std_theta; // Standard deviations for x, y, and theta
